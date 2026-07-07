@@ -9,27 +9,17 @@ Powiązany projekt aplikacyjny (G1, XREAL, teleop, wirtualna kamera): **`~/Web_S
 
 ## Spis treści
 
-- [ros2\_projects\_ws](#ros2_projects_ws)
-  - [Spis treści](#spis-treści)
-  - [Struktura katalogów](#struktura-katalogów)
-  - [Wymagania](#wymagania)
-  - [Start kontenera (Distrobox)](#start-kontenera-distrobox)
-  - [Środowisko ROS w kontenerze](#środowisko-ros-w-kontenerze)
-  - [Budowanie paczek (`build`)](#budowanie-paczek-build)
-  - [Diagnostyka (`diag`)](#diagnostyka-diag)
-  - [Gdzie trzymać kod ROS](#gdzie-trzymać-kod-ros)
-  - [Uruchamianie — G1 + teleop + wirtualna kamera](#uruchamianie--g1--teleop--wirtualna-kamera)
-    - [1. Przygotowanie środowiska](#1-przygotowanie-środowiska)
-    - [2. Bringup G1 (RViz, OAK, węzły — funkcje domyślnie wyłączone)](#2-bringup-g1-rviz-oak-węzły--funkcje-domyślnie-wyłączone)
-    - [3. Wirtualna kamera IMU (gogle XREAL) — osobny terminal](#3-wirtualna-kamera-imu-gogle-xreal--osobny-terminal)
-    - [4. Detekcja ludzi + czerwone markery w scenie AR — osobny terminal](#4-detekcja-ludzi--czerwone-markery-w-scenie-ar--osobny-terminal)
-    - [5. Stream kamery laptopa (jeśli nie używasz OAK na ekranie wirtualnym)](#5-stream-kamery-laptopa-jeśli-nie-używasz-oak-na-ekranie-wirtualnym)
-    - [6. Stream pulpitu (C++, niskie opóźnienie)](#6-stream-pulpitu-c-niskie-opóźnienie)
-  - [Serwisy po starcie bringupu (G1)](#serwisy-po-starcie-bringupu-g1)
-  - [teleop\_moving\_window — węzły AR / kamery](#teleop_moving_window--węzły-ar--kamery)
-  - [Podgląd obrazów](#podgląd-obrazów)
-  - [RViz (G1 + OAK)](#rviz-g1--oak)
-  - [Powiązane dokumenty](#powiązane-dokumenty)
+- [Struktura katalogów](#struktura-katalogów)
+- [Wymagania](#wymagania)
+- [Start kontenera (Distrobox)](#start-kontenera-distrobox)
+- [Środowisko ROS w kontenerze](#środowisko-ros-w-kontenerze)
+- [Budowanie paczek (`build`)](#budowanie-paczek-build)
+- [Diagnostyka (`diag`)](#diagnostyka-diag)
+- [Gdzie trzymać kod ROS](#gdzie-trzymać-kod-ros)
+- [Uruchamianie — G1 + teleop + wirtualna kamera](#uruchamianie--g1--teleop--wirtualna-kamera)
+- [Serwisy po starcie bringupu (G1)](#serwisy-po-starcie-bringupu-g1)
+- [teleop_moving_window — węzły AR / kamery](#teleop_moving_window--węzły-ar--kamery)
+- [Podgląd obrazów](#podgląd-obrazów)
 
 ---
 
