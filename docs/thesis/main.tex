@@ -1,0 +1,429 @@
+\documentclass[12pt,a4paper,twoside]{report}
+
+% Wybierz styl nagłówka rozdziału:
+% 'classic' — Rozdział X (nad tytułem)
+% 'inline'  — X. Tytuł rozdziału (w jednej linii)
+
+\def\chapterstyletype{classic}  % lub zmień na 'inline'
+
+%MARGINESY
+\usepackage[left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm, headsep=1.2cm]{geometry}
+
+%INTERLINIA
+\linespread{1.3}
+
+%Język polski
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Pakiet, który poprawia typografię: kerning, justowanie i drobne szczegóły tekstu
+\usepackage{microtype}
+
+%landscape obrocone
+\usepackage{pdflscape}
+
+%tekst matematyczny
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+%dodawanie grafiki
+\usepackage{graphicx}
+
+%do grupowania rysunków
+\usepackage{subcaption}
+
+%brak wdów - pojedyncze linie
+\usepackage[all]{nowidow}
+
+%Zapobieganie dzieleniu się wyrazów
+%\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+%do kolorów
+%\usepackage{color}
+\usepackage{xcolor}
+
+\usepackage{textcomp}%do symbolu euro
+\usepackage[official]{eurosym}%drugi symbol euro
+
+\usepackage[colorlinks=true,allcolors=black]{hyperref}
+
+\usepackage{indentfirst} %dodaje wcięcie w pierwszym akapicie
+
+%listy numerowane
+\usepackage{enumitem}
+\setlist[enumerate]{noitemsep,nolistsep}
+\setlist[itemize]{noitemsep,nolistsep} 
+
+%do modyfikacji wyglądu spisu treści, listy rysunków i tabel
+\usepackage{tocloft}
+
+%do tabel
+\usepackage{tabularx}
+\usepackage{multirow} %do połączenia wierszy
+\usepackage{diagbox}%do ukośnej linii w tabelii
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{j}{>{\raggedleft}p{200pt}}
+\usepackage{caption}
+\usepackage{lscape}
+
+
+
+
+
+%podpisy rysunków i tabel
+\renewcommand*{\figurename}{Rys.} %zmiana podpisu rysunku
+\renewcommand*{\tablename}{Tab.} %zmiana podpisu tabeli
+\captionsetup{font=small, labelsep=period, justification=centerlast} % Modyfikacja stylu podpisów: 
+% - font=small ustawia rozmiar czcionki podpisu na 11 pt (można użyć footnotesize dla 10 pt),
+% - labelsep=period wprowadza kropkę po numerze (zamiast dwukropka),
+% - justification=centerlast centrowanie podpisu z wyrównaniem ostatniego wiersza do środka.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ustawienie niestandardowej numeracji sekcji i podsekcji.
+% Dodanie kropki po numerach (np. z "2.1 Rozdział" na "2.1. Rozdział").
+% Można odkomentować, jeśli chcemy standardową formę numeracji - wtedy odkomentować wszystko poniżej do %%spis treści%%%%
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}.} % Numeracja sekcji w formacie: numer_rozdziału.numer_sekcji (np. 2.3.)
+\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}.} % Numeracja podsekcji w formacie: numer_rozdziału.numer_sekcji.numer_podsekcji (np. 2.3.1.)
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%Spis treści%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\cftbeforechapskip}{0pt} %ustawia odstęp przed rozdziałami w spisie treści na 0pt; można zmienić wartość (np. 10pt), by zwiększyć odstęp, lub zakomentować tę linię, by przywrócić domyślne ustawienie
+
+%%%%%%%%%%%%%%%%%%%%%%%%Tytuły rozdziałów%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\renewcommand{\cftchapaftersnum}{.}%ustawia, że po numerze rozdziału w spisie treści pojawi się kropka .
+%\renewcommand{\chaptername}{}
+%\renewcommand{\thechapter}{\arabic{chapter}.} % Dodaje kropkę po numerze rozdziału
+
+\usepackage{ifthen}
+\usepackage{ragged2e}  % do lewego wyrównania z lepszym łamaniem niż standardowy \raggedright
+
+%instrukcja warunkowa pozwalająca na wybór formatowania nagłówka/tytułu rozdziału
+
+\ifthenelse{\equal{\chapterstyletype}{classic}}{
+  % Styl: Rozdział X (na górze), tytuł pod spodem
+  \titleformat{\chapter}[display]
+    {\normalfont\LARGE\bfseries\RaggedRight}
+    {\chaptertitlename\ \thechapter} % np. "Rozdział 1"
+    {0pt}
+    {\LARGE}
+}{%
+  % Styl: X. Tytuł rozdziału (inline) z wiszącym wcięciem i wyrównaniem wielowierszowym
+  \titleformat{\chapter}[block]
+    {\normalfont\LARGE\bfseries\RaggedRight}
+    {}
+    {0pt}
+    {%
+      \makebox[1em][l]{\thechapter.}%
+      \hangindent=1em
+      \hangafter=1
+      \ignorespaces
+    }
+}
+
+% Styl rozdziału bez numeru (dla Bibliografii, Streszczenia itd.)
+\titleformat{name=\chapter, numberless}[block]
+  {\normalfont\LARGE\bfseries\RaggedRight}
+  {}
+  {0pt}
+  {\hangindent=1em\hangafter=1}
+
+%styl sekcji
+\titleformat{\section}[hang]
+  {\normalfont\Large\bfseries\RaggedRight} % format
+  {\thesection}               % section number with dot
+  {0.3em}                       % space between number and title
+  {}                          % before title code
+%styl podsekcji
+  \titleformat{\subsection}[hang]
+  {\normalfont\large\bfseries\RaggedRight} % format
+  {\thesubsection}               % section number with dot
+  {0.3em}                       % space between number and title
+  {}                          % before title code
+%stylpodpodsekcji
+  \titleformat{\subsubsection}[hang]
+  {\normalfont\normalsize\bfseries} % format
+  {}               % brak numeru, czyli pusty label
+  {0pt}            % odstęp między label a tytułem (brak, bo label pusty)
+  {}                % before title code
+
+% Ustawienie odstępów wokół tytułu rozdziału:
+% \titlespacing*{<komenda>}{<lewy margines>}{<przed tytułem>}{<po tytule>}
+% Tutaj:
+% - lewy margines       = 0pt (brak wcięcia)
+% - odstęp przed tytułem = 0pt (brak pustego miejsca na górze)
+% - odstęp po tytule     = \baselineskip (dokładnie jeden wiersz odstępu przed tekstem)
+\titlespacing*{\chapter}{0pt}{0pt}{\baselineskip}
+
+
+%definicje, twierdzenia,...
+\newtheorem{twierdzenie}{Twierdzenie}[chapter]
+\newtheorem{lemat}[twierdzenie]{Lemat}
+\newtheorem{wniosek}[twierdzenie]{Wniosek}
+\newtheorem{obserwacja}[twierdzenie]{Obserwacja}
+\newtheorem{uwaga}[twierdzenie]{Uwaga}
+\theoremstyle{definition} %prostowanie czcionki
+\newtheorem{przyklad}[twierdzenie]{Przykład}
+\newtheorem{definicja}[twierdzenie]{Definicja}
+
+
+%używane pakiety
+%\usepackage{setspace}
+%\usepackage{cite}
+%\usepackage{tikz}
+%\usepackage{subcaption}
+
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+
+
+
+
+
+
+\definecolor{niebieski}{RGB}{0,130,150} %kolor niebieski
+\definecolor{mygray}{gray}{0.6} 		% kolor szary
+\definecolor{zielony}{rgb}{0.98, 1.0, 0.98} % kolor zielony
+
+\lstset{ 
+	backgroundcolor=\color{zielony},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\sffamily, %\footnotesize\ttfamily\fontsize{11}{0.8em}\selectfont,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	columns=fullflexible,
+	commentstyle=\color{mygreen},    % comment style
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	firstnumber=1,                   % start line enumeration with line 1
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	xleftmargin=0pt,%\parindent,
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	language=python,
+	morekeywords={*, end, function, ...}
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2	                   % sets default tabsize to 2 spaces
+}
+
+
+
+%parametry dla kodów źródłowych
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+
+
+\begin{document}
+
+%-----------------------------------------------------------------------------------
+%                            STRONA TYTUŁOWA
+%-----------------------------------------------------------------------------------
+% W zależności od potrzeb można załadować jedną z dwóch wersji strony tytułowej:
+%
+% 1. strona_tytulowa-1
+%    - Klasyczna wersja strony tytułowej
+%    - Tytuł pracy oraz dane autora/promotora są wyśrodkowane
+%    - NIE jest dostosowana do okładki PRz (brak zgodności z okienkiem)
+%
+% 2. strona_tytulowa-2
+%    - Wersja dopasowana do obowiązującego wzoru okładki PRz
+%    - Tytuł, autor, promotor są umieszczone tak, aby były widoczne
+%      w okienku okładki zgodnej z Systemem Identyfikacji Wizualnej PRz
+%
+% ABY WYBRAĆ WŁAŚCIWĄ STRONĘ TYTUŁOWĄ:
+% - pozostaw aktywną linię \input{front-matter/title-page-classic} lub
+% - zamień ją na:        \input{front-matter/title-page-cover}
+%
+% UWAGA: Nie należy używać obu jednocześnie!
+
+    
+    \input{front-matter/title-page-classic} % lub front-matter/title-page-cover
+    \linespread{1.3}
+    \newpage 
+%----------------------------------------------------------------------------------
+%                       PUSTA STRONA PO STRONIE TYTUŁOWEJ
+%----------------------------------------------------------------------------------
+
+
+    \thispagestyle{empty} %pusta strona bez numeru po stronie tytułowej
+    ~\vfill
+	\newpage
+    
+%---------------------------------------------------------------------------------
+%                      STRONA Z PODZIĘKOWANIEM
+%---------------------------------------------------------------------------------
+\vspace*{16cm}
+\thispagestyle{empty}
+\begin{flushright}
+\textit{Miejsce na ewentualne podziękowania.\\
+W przypadku braku podziękowań, tę stronę wraz z następującą po niej pustą stroną\\
+należy usunąć z wersji końcowej pracy.}%-- -Wypełnia student. Jeśli nie ma podziękowań, to można odkomentować stronę z podziękowaniem i stronę po stronie z podziękowaniem.
+\end{flushright}
+\newpage
+
+%----------------------------------------------------------------------------------
+%                       PUSTA STRONA PO STRONIE Z PODZIĘKOWANIEM
+%----------------------------------------------------------------------------------
+
+\thispagestyle{empty}
+~\vfill
+\newpage
+
+%---------------------------------------------------------------------------------
+%                      SPIS TREŚCI
+%---------------------------------------------------------------------------------
+	\renewcommand{\contentsname}{\LARGE Spis treści}
+    \tableofcontents
+    \setcounter{tocdepth}{1}
+    %\setcounter{page}{1} %numeracja stron od 1
+	%\thispagestyle{headings}
+    \cleardoublepage %wymusza rozpoczęcie nowego rozdziału na stronie nieparzystej (prawej); dodaje pustą stronę, jeśli potrzeba
+    %\clearpage  %kończy bieżącą stronę i wypisuje wszystkie zaległe elementy (np. rysunki, tabele), ale nie wymusza rozpoczęcia nowego rozdziału na stronie nieparzystej
+    %\newpage %Wymusza przejście do nowej strony, ale nie kończy otwartych elementów
+
+%---------------------------------------------------------------------------------
+%                      WSTĘP
+%---------------------------------------------------------------------------------
+\chapter*{Wstęp}
+\addcontentsline{toc}{chapter}{Wstęp}
+
+Współczesne systemy bezzałogowych statków powietrznych (UAV) ulegają dynamicznej transformacji, ewoluując od pojedynczych, zdalnie sterowanych jednostek w kierunku autonomicznych rojów zdolnych do realizacji złożonych misji rozproszonych. Rosnąca liczba agentów operujących we wspólnej przestrzeni powietrznej wymusza porzucenie tradycyjnego modelu sterowania, w którym jeden operator kontroluje jedną maszynę, na rzecz paradygmatu interakcji człowiek-rój (ang. \textit{Human-Swarm Interaction}, HSI). Niestety, klasyczne interfejsy sterowania wprowadzają drastyczne obciążenie poznawcze operatora, co przy zarządzaniu rojem prowadzi do natychmiastowej utraty świadomości sytuacyjnej oraz spadku zaufania do automatyzacji. Gwałtowny rozwój wielkich modeli językowych (LLM) stwarza bezprecedensową okazję do zaprojektowania w pełni naturalnych, głosowych interfejsów komunikacyjnych (HRI), które działając jako semantyczny bufor między człowiekiem a algorytmami rojowymi, pozwalają na wydawanie wysokopoziomowych dyrektyw zamiast mikrozarządzania trajektoriami.
+
+Głównym celem niniejszej pracy jest opracowanie, implementacja i ewaluacja systemu adaptacyjnego sterowania rojem dronów. System ten integruje interfejs głosowy wspierany modelami LLM z modułem dynamicznej selekcji algorytmów nawigacyjnych. Zdefiniowana w pracy hipoteza badawcza zakłada, że włączenie frameworku agentowego (RAI) integrującego LLM ze środowiskiem ROS2 i systemem Nav2, połączone z adaptacyjnymi algorytmami inteligencji stadnej (m.in. DPSO), pozwala na redukcję złożoności sterowania z poziomu liniowego $O(n)$ do poziomu stałego $O(1)$ z punktu widzenia operatora, przy jednoczesnym zwiększeniu efektywności i bezpieczeństwa misji.
+
+Szczegółowy zakres pracy obejmuje zaprojektowanie architektury informatycznej łączącej platformę \texttt{ds-crazyflies} z warstwą percepcyjną i decyzyjną. Moduł decyzyjny będzie autonomicznie oceniał stan otoczenia i na bazie poleceń głosowych dobierał odpowiednią strategię nawigacyjną. 
+
+Struktura pracy została podzielona na cztery zasadnicze rozdziały. Rozdział pierwszy stanowi rygorystyczny przegląd literatury z zakresu barier kognitywnych, interfejsów HRI, koncepcji Embodied AI oraz optymalizacji rojowej. W rozdziale drugim scharakteryzowano zastosowane technologie, w tym ROS2, framework RAI oraz stos nawigacyjny Nav2. Rozdział trzeci, stanowiący inżynierski rdzeń pracy, opisuje autorską architekturę i implementację adaptacyjnego systemu decyzyjnego. Rozdział czwarty zawiera analizę wyników przeprowadzonych badań symulacyjnych w zróżnicowanych scenariuszach operacyjnych, weryfikując przyjęte założenia projektowe.
+
+\cleardoublepage
+\chapter{Teoretyczne podstawy interakcji człowiek-rój (HSI) oraz architektury agentowo-robotycznej}
+
+\section{Bariery kognitywne i ograniczenia poznawcze w wielodronowych systemach sterowania}
+Przejście od zdalnego sterowania (ang. \textit{teleoperation}) do sterowania nadzorczego (ang. \textit{supervisory control}) stanowi fundamentalny wymóg w rozwoju zaawansowanych systemów UAV. W tradycyjnym ujęciu, złożoność poznawcza sterowania niezależnymi robotami skaluje się liniowo ze wzorem $O(n)$, gdzie $n$ to liczba jednostek. Wymaga to od operatora alokacji zasobów uwagi wprost proporcjonalnie do wielkości floty, co w warunkach krytycznych prowadzi do drastycznego przeciążenia kognitywnego (ang. \textit{cognitive overload}). Zgodnie z badaniami przeprowadzonymi przez Kollinga i in., nadrzędnym celem inżynierii systemów rojowych jest sprowadzenie tej złożoności do poziomu $O(1)$, w którym operator zarządza całym rojem (lub jego podzbiorami -- ang. \textit{subswarms}) jako pojedynczą, zintegrowaną encją \cite{kolling2016}.
+
+Pojemność ludzkiej pamięci roboczej w kontekście jednoczesnej kontroli wielokrotnych bezzałogowców jest ściśle ograniczona. Badania empiryczne wykazują, że ludzki operator jest w stanie skutecznie śledzić do 16 obiektów wyłącznie w przypadku najprostszych zadań selekcji, do 7 w operacjach o średniej złożoności, natomiast w przypadku heterogenicznych, zaawansowanych misji -- zaledwie do 4 jednostek \cite{dia2010}. Próba przekroczenia tych barier, określana problematyką wielozadaniowości (ang. \textit{multitasking}), skutkuje skokową degradacją świadomości sytuacyjnej (ang. \textit{Situation Awareness - SA}), w szczególności podczas tzw. przełączania zadań (ang. \textit{task switching}) \cite{chen2010}. W interakcji z zaawansowaną automatyzacją zjawisko to rodzi dodatkowe zagrożenia, takie jak \textit{cognitive tunneling} (zawężenie uwagi do jednego wskaźnika) oraz nadmierna ufność w system (ang. \textit{complacency}), która zwiększa ryzyko występowania błędów decyzyjnych (tzw. zjawiska \textit{false-alarm} i \textit{miss-prone}) \cite{chen2010}.
+
+Rozwiązaniem tego problemu jest wdrożenie paradygmatu współpracy wielu operatorów z wieloma platformami (M:N) oraz architektury zespołu ludzko-autonomicznego (ang. \textit{Human-Autonomy Teaming, HAT}), wprowadzającej role takich jak monitory czy menedżerowie lotu \cite{smith2021}. Odpowiednio zaprojektowany interfejs w takim zespole pozwala na zastosowanie zarządzania przez wyjątki (ang. \textit{Management by Exception - MBE}) lub zgody (ang. \textit{Management by Consent - MBC}) \cite{chen2010}. Co więcej, wprowadzono koncepcję tzw. ,,dobroczynnego zaniedbania'' (ang. \textit{neglect benevolence}), która zakłada, że w systemach rojowych o wysokim wskaźniku autonomii, czasowa nieobecność interwencji operatora często pozwala rojom skuteczniej osiągać optymalne, globalne stany stabilności \cite{kolling2016}.
+
+\section{Modele komunikacji głosowej i interfejsy HRI w standardzie ROS}
+Aby zrealizować model sterowania na poziomie $O(1)$, konieczne jest zastąpienie klasycznych joysticków interfejsami o wysokim poziomie semantycznym. Interakcja Człowiek-Robot (ang. \textit{Human-Robot Interaction, HRI}) opiera się obecnie na dwukierunkowej komunikacji (ang. \textit{bidirectional communication}), która pozwala robotowi nie tylko na pasywny odbiór komend, lecz także na informowanie człowieka o swoich zamiarach (ang. \textit{intent expression}) \cite{pomianek2026}.
+
+W nowoczesnych architekturach robotycznych dąży się do multimodalnej fuzji danych percepcyjnych. Integracja sygnałów fonicznych z estymacją postawy, mimiką czy wskaźnikami biologicznymi (np. sygnałami EEG) pozwala na zbudowanie wysoce odpornego modelu predykcyjnego stanów emocjonalnych i intencji operatora \cite{pomianek2026}. Ekosystem Robot Operating System (ROS) standaryzuje to podejście poprzez zbiór konwencji \texttt{ROS4HRI} (w szczególności \texttt{REP-155}). Umożliwia to zunifikowany przesył danych za pośrednictwem dedykowanych bibliotek takich jak \texttt{hri\_msgs} czy pakietów śledzących, m.in. \texttt{hri\_person\_manager} \cite{pomianek2026}. 
+
+Krytycznym aspektem rozwoju systemów rozpoznawania mowy dla rojów dronów na polu walki i w warunkach infrastruktury krytycznej są kwestie etyki i bezpieczeństwa. W dobie rygorystycznych wymogów prawnych (m.in. RODO/GDPR), preferowanym wzorcem architektonicznym jest Przetwarzanie na Krawędzi (ang. \textit{Edge Computing}), które gwarantuje asynchroniczną ewaluację modeli ML (Machine Learning) bez konieczności przesyłania wrażliwych danych biometrycznych poza sieć lokalną roju. Podejście to, znane jako \textit{Privacy by Design}, minimalizuje ryzyko wektorów ataków cyfrowych na komunikację akustyczną \cite{pomianek2026}.
+
+\section{Paradygmat Embodied AI i rola wielkich modeli językowych (LLM) w sterowaniu}
+Tłumaczenie nieskodyfikowanej mowy ludzkiej na formalne wywołania węzłów ROS2 wymaga warstwy pośredniczącej, wyposażonej w szeroki aparat kognitywny. Włączenie Wielkich Modeli Językowych (LLM) otwiera nowe możliwości w zakresie podejmowania decyzji wieloagentowych (ang. \textit{Multi-Agent Decision-Making, MADM}). W modelu tym algorytmy LLM ewoluują od prostych interpreterów poleceń do funkcji \textit{policy generators} oraz \textit{critics}, stymulujących mechanizmy tzw. uczenia w kontekście (ang. \textit{in-context learning}) oraz implementacji obliczeniowej Teorii Umysłu (ang. \textit{Theory of Mind - ToM}) u agentów sztucznych \cite{sun2025}.
+
+Zastosowanie LLM w robotyce wymusiło powstanie paradygmatu Sztucznej Inteligencji Ucieleśnionej (ang. \textit{Embodied AI}). Samo oprogramowanie LLM nie dysponuje fizyczną świadomością granic czasoprzestrzennych, stąd jego integracja w zamkniętej pętli wymaga dedykowanych architektur pośrednich. Jednym z wiodących rozwiązań w tej dziedzinie jest framework RAI \cite{rachwal2025}. Architektura RAI pozwala na kategoryzację systemów inteligentnych na agenty konwersacyjne (ang. \textit{Conversational Agents}) i oparte na stanach (ang. \textit{State-Based Agents}). Poprzez wbudowane mechanizmy integracyjne (ang. \textit{Connectors}), w tym zwłaszcza integrację warstwy \texttt{ROS2Connector}, framework ten pozwala na bezproblemową komunikację modeli generatywnych z komponentami sprzętowymi \cite{rachwal2025}.
+
+Centralnym wyzwaniem pozostaje zjawisko tzw. halucynacji AI, czyli konfabulowania przez modele nielogicznych i z fizycznego punktu widzenia niewykonalnych instrukcji nawigacyjnych. Aby ograniczyć to zjawisko, ucieleśnienie odbywa się przy pomocy technik Generowania Wzbogaconego Wyszukiwaniem (ang. \textit{Retrieval-Augmented Generation, RAG}). Mechanizm ten wykorzystuje zaawansowane, wielowymiarowe bazy wektorowe (np. \texttt{Faiss}) do semi-automatycznego wstrzykiwania do \textit{system promptów} wiedzy kontekstowej o parametrach roju, limitach kinematycznych i dostępnych zachowaniach (ang. \textit{Tools}). Pozwala to LLM na deterministyczne przyporządkowywanie otwartych instrukcji głosowych do zamkniętego zbioru algorytmów operacyjnych drona \cite{rachwal2025}.
+
+\section{Algorytmy inteligencji stadnej i optymalizacja zachowań rojowych}
+Na najniższym poziomie abstrakcji układu decyzyjnego, polecenia przetworzone przez LLM zostają delegowane do systemu planowania trajektorii i alokacji celów przestrzennych roju. Biologicznie inspirowana Inteligencja Stadna (ang. \textit{Swarm Intelligence}) wykorzystuje samoorganizujące się jednostki z ograniczonymi receptorami do powstawania skomplikowanych emergentnych zachowań globalnych \cite{bonabeau1999, kennedy2001}. W naturze zachowania takie -- jak formowanie klucza w kształcie litery V przez ptaki migrujące (optymalizacja oporów aerodynamicznych) lub systemy podziału ról (ang. \textit{division of labor}) u insektów -- opierają się nierzadko na tzw. stygmergii, tj. niebezpośredniej komunikacji poprzez modyfikację fizycznego środowiska \cite{bonabeau1999, kennedy2001}.
+
+W warunkach symulowanej autonomii roju, zadania re-alokacji i nawigacji dynamicznej modelowane są najczęściej w matematycznej domenie Dynamicznego Problemu Komiwojażera (ang. \textit{Dynamic Traveling Salesman Problem, DTSP}) \cite{strak2017}. Adaptacja do szybko zmieniających się warunków operacyjnych wymaga wysoce nieliniowych metaheurystyk. Do czołowych z nich należy algorytm Dyskretnej Optymalizacji Roju Cząstek (ang. \textit{Discrete Particle Swarm Optimization, DPSO}) \cite{strak2017}.
+
+Mechanika algorytmu DPSO, stosowana w kontekście nawigacji rojowej UAV, wykorzystuje rozbudowane struktury sąsiedztwa i heterogeniczną adaptację parametrów, co chroni sub-roje przed przedwczesną zbieżnością w minimach lokalnych. Co więcej, wzbogacenie algorytmu DPSO o mechanizmy tzw. pamięci feromonowej potęguje efektywność przeszukiwania topologii grafu operacyjnego poprzez nakładanie kar i nagród dla eksplorowanych węzłów ścieżki \cite{strak2017}. W celu estymacji optymalnych ścieżek stosuje się zaawansowane relaksacje metryczne, w tym tzw. estymację odległości opartą o dolne ograniczenia \textit{Held-Karp} oraz $\alpha$-miarę \textit{Helsgauna}, co pozwala modelom LLM na deterministyczną ewaluację propozycji planu przed wysłaniem komend wykonawczych do węzłów środowiska ROS2 \cite{strak2017}.
+
+\cleardoublepage
+\chapter{Technologie, narzędzia i środowiska symulacyjne}
+\section{Robot Operating System 2 (ROS2) jako przemysłowy standard middleware}
+% Tu znajdzie się treść w kolejnym etapie
+\section{Architektura systemu nawigacyjnego Nav2 i wykorzystanie Drzew Zachowań (Behavior Trees)}
+\section{Framework RAI i integracja agentów LLM ze stosem robotycznym}
+\section{Platforma ds-crazyflies i charakterystyka fizyczna platform UAV}
+
+\cleardoublepage
+\chapter{Autorski projekt systemu adaptacyjnego sterowania rojem}
+\section{Architektura informatyczna rozwiązania – warstwy abstrakcji i przepływ danych}
+\section{Moduł interfejsu głosowego – fuzja mowy, generowanie wektorów i mapowanie intencji}
+\section{Silnik decyzyjny LLM i selekcja algorytmów nawigacyjnych oparta na RAG}
+\section{Implementacja adaptacyjnego algorytmu dyskretnej optymalizacji roju (DPSO)}
+
+\cleardoublepage
+\chapter{Walidacja, scenariusze operacyjne i analiza wyników}
+\section{Metodologia badań i metryki oceny wydajności roju (świadomość sytuacyjna, czas misji)}
+\section{Scenariusz 1: Statyczna eksploracja i zarządzanie formacją ($O(1)$ complexity)}
+\section{Scenariusz 2: Dynamiczna adaptacja do awarii podzespołów i re-alokacja zadań}
+\section{Ocena redukcji obciążenia poznawczego operatora}
+
+\cleardoublepage
+\chapter*{Podsumowanie i kierunki dalszych badań}
+\addcontentsline{toc}{chapter}{Podsumowanie i kierunki dalszych badań}
+    %-----------------------------------------------------------------------------------
+    %                            BIBLIOGRAFIA
+    %-----------------------------------------------------------------------------------
+    \begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\bibitem{kolling2016} A. Kolling, P. Walker, N. Chakraborty, K. Sycara, and M. Lewis, ,,Human interaction with robot swarms: A survey,'' \emph{IEEE Transactions on Human-Machine Systems}, vol. 46, no. 1, pp. 9--26, Feb. 2016.
+\bibitem{chen2010} J. Y. C. Chen, M. J. Barnes, and M. Harper-Sciarini, ,,Supervisory Control of Unmanned Vehicles,'' U.S. Army Research Laboratory, Tech. Rep. ARL-TR-5136, 2010.
+\bibitem{dia2010} Defense Intelligence Agency, ,,Cognitive Limits on Simultaneous Control of Multiple Unmanned Spacecraft,'' Defense Intelligence Reference Document, DIA-08-1101-001, 2010.
+\bibitem{smith2021} C. L. Smith \textit{et al.}, ,,A Cognitive Walkthrough of Multiple Drone Delivery Operations,'' in \emph{AIAA Aviation 2021 Forum}, Aug. 2021.
+\bibitem{pomianek2026} M. Pomianek, ,,Analiza literatury HRI,'' Politechnika Rzeszowska, Tech. Rep., 2026.
+\bibitem{rachwal2025} K. Rachwał \textit{et al.}, ,,RAI: Flexible Agent Framework for Embodied AI,'' Robotec.AI, Warsaw, Poland, arXiv:2505.07532v1, 2025.
+\bibitem{sun2025} C. Sun, S. Huang, and D. Pompili, ,,LLM-Based Multi-Agent Decision-Making: Challenges and Future Directions,'' \emph{IEEE Robotics and Automation Letters}, vol. 10, no. 6, 2025.
+\bibitem{strak2017} Ł. L. Strąk, ,,Adaptacyjny algorytm optymalizacji stadnej cząsteczek dla dynamicznego problemu komiwojażera,'' Rozprawa doktorska, Uniwersytet Śląski, Wydział Informatyki i Nauki o Materiałach, 2017.
+\bibitem{bonabeau1999} E. Bonabeau, M. Dorigo, and G. Theraulaz, \emph{Swarm Intelligence: From Natural to Artificial Systems}. New York, NY, USA: Oxford University Press, 1999.
+\bibitem{kennedy2001} J. Kennedy and R. C. Eberhart, \emph{Swarm Intelligence}. San Francisco, CA, USA: Morgan Kaufmann Publishers, 2001.
+
+\end{thebibliography}
+    \cleardoublepage
+
+    %-----------------------------------------------------------------------------------
+    %                            SPISY RYSUNKÓW/TABEL
+    %-----------------------------------------------------------------------------------
+    %\renewcommand{\listfigurename}{\LARGE Spis rysunków}
+    %\addcontentsline{toc}{chapter}{Spis rysunków}
+    %\listoffigures
+    %\cleardoublepage
+
+    %\renewcommand{\listtablename}{\LARGE Spis tabel}
+    %\addcontentsline{toc}{chapter}{Spis tabel}
+    %\listoftables
+    %\cleardoublepage
+
+
+    %-----------------------------------------------------------------------------------
+    %                            STRESZCZENIA
+    %-----------------------------------------------------------------------------------
+	
+
+    \cleardoublepage
+	\include{front-matter/abstract}
+    \thispagestyle{empty}
+
+    %-----------------------------------------------------------------------------------
+    %                            TABELA GENAI
+    %-----------------------------------------------------------------------------------
+    \cleardoublepage
+	\include{front-matter/genai-disclosure} %obowiązkowe dla studentów wybierających tematy od semestru letniego 2024/2025, pozostali mogą usunąć
+	
+	\end{document}
+
+	

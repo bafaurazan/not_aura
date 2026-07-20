@@ -1,0 +1,10 @@
+# Pliki robocze generowane przez LaTeX
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# Lokalny wynik składania
+literatura.pdf
