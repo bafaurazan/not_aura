@@ -10,10 +10,19 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 
+% Wpis: autor → tytuł → opis wykorzystania (osobne linie).
+\newcommand{\lit}[3]{%
+  \item
+  \textbf{#1}\\[0.15em]
+  \textit{#2}\\[0.35em]
+  #3%
+}
+
 \begin{document}
 
 \begin{center}
-    {\Large \textbf{Zestawienie literatury i plan jej wykorzystania w pracy}}\\
+    {\Large \textbf{Zestawienie literatury i plan jej
+    wykorzystania w pracy}}\\
     \vspace{0.3cm}
     {\large Rafał Bazan (nr albumu: 176768)}\\
 \end{center}
@@ -21,45 +30,134 @@
 \vspace{0.5cm}
 
 \section*{1. Bariery kognitywne i interakcja człowiek-rój (HSI)}
-\textit{Literatura wykorzystana w Rozdziale 1. do uzasadnienia potrzeby zmiany sposobu sterowania rojem z ręcznego na wspomagany sztuczną inteligencją.}
+\textit{Literatura wykorzystana w Rozdziale 1. do
+uzasadnienia potrzeby zmiany sposobu sterowania rojem
+z ręcznego na wspomagany sztuczną inteligencją.}
 
-\begin{itemize}[leftmargin=*]
-    \item \textbf{A. Kolling et al. (2016)} -- \textit{Human interaction with robot swarms: A survey}. Praca definiuje wymóg przejścia na sterowanie grupowe o stałej złożoności $O(1)$. Służy jako podstawa do uargumentowania, dlaczego operator powinien wydawać ogólne dyrektywy całemu rojowi, zamiast kontrolować każdą jednostkę z osobna.
+\begin{itemize}[leftmargin=*, itemsep=1.1em]
+    \lit{A. Kolling et al. (2016)}
+        {Human interaction with robot swarms: A survey}
+        {Praca definiuje wymóg przejścia na sterowanie
+        grupowe o stałej złożoności $O(1)$. Służy jako
+        podstawa do uargumentowania, dlaczego operator
+        powinien wydawać ogólne dyrektywy całemu rojowi,
+        zamiast kontrolować każdą jednostkę z osobna.}
 
-    \item \textbf{J. Y. C. Chen (2010) oraz Defense Intelligence Agency (2010)} -- \textit{Supervisory Control of Unmanned Vehicles} / \textit{Cognitive Limits on Simultaneous Control of Multiple Unmanned Spacecraft}. Raporty wojskowe pokazujące limity ludzkiej uwagi przy zarządzaniu wieloma obiektami naraz. Stanowią uzasadnienie, dlaczego interfejs oparty na modelach językowych jest optymalnym rozwiązaniem zapobiegającym przeciążeniu operatora.
+    \lit{J. Y. C. Chen (2010) oraz
+        Defense Intelligence Agency (2010)}
+        {Supervisory Control of Unmanned Vehicles /
+        Cognitive Limits on Simultaneous Control of
+        Multiple Unmanned Spacecraft}
+        {Raporty wojskowe pokazujące limity ludzkiej
+        uwagi przy zarządzaniu wieloma obiektami naraz.
+        Stanowią uzasadnienie, dlaczego interfejs oparty
+        na modelach językowych jest optymalnym
+        rozwiązaniem zapobiegającym przeciążeniu
+        operatora.}
 
-    \item \textbf{C. Smith et al. (2021) / L. Jia et al. (2026)} -- \textit{A Cognitive Walkthrough of Multiple Drone Delivery Operations} / \textit{Understanding Situation Awareness in Multi-UAV Supervision}. Artykuły analizujące poziomy świadomości sytuacyjnej i zmęczenia operatorów floty bezzałogowców. Mogą posłużyć w dalszych etapach jako punkt odniesienia przy wyznaczaniu metryk oceny obciążenia człowieka podczas testów.
+    \lit{C. Smith et al. (2021) / L. Jia et al. (2026)}
+        {A Cognitive Walkthrough of Multiple Drone
+        Delivery Operations / Understanding Situation
+        Awareness in Multi-UAV Supervision}
+        {Artykuły analizujące poziomy świadomości
+        sytuacyjnej i zmęczenia operatorów floty
+        bezzałogowców. Mogą posłużyć w dalszych etapach
+        jako punkt odniesienia przy wyznaczaniu metryk
+        oceny obciążenia człowieka podczas testów.}
 \end{itemize}
 
 \section*{2. Embodied AI i modele językowe (LLM)}
-\textit{Podstawa warstwy decyzyjnej projektu (Rozdział 3). Publikacje tłumaczą, jak semantycznie powiązać mowę z systemem operacyjnym robota.}
+\textit{Podstawa warstwy decyzyjnej projektu
+(Rozdział 3). Publikacje tłumaczą, jak semantycznie
+powiązać mowę z systemem operacyjnym robota.}
 
-\begin{itemize}[leftmargin=*]
-    \item \textbf{K. Rachwał et al. (Robotec.AI, 2025)} -- \textit{RAI: Flexible Agent Framework for Embodied AI}. Dokumentacja frameworku RAI do integracji modeli generatywnych z architekturą ROS2. Stanowi punkt wyjścia do zaplanowania warstwy pośredniczącej między modelami językowymi a komponentami wykonawczymi systemu.
+\begin{itemize}[leftmargin=*, itemsep=1.1em]
+    \lit{K. Rachwał et al. (Robotec.AI, 2025)}
+        {RAI: Flexible Agent Framework for Embodied AI}
+        {Dokumentacja frameworku RAI do integracji
+        modeli generatywnych z architekturą ROS2.
+        Stanowi punkt wyjścia do zaplanowania warstwy
+        pośredniczącej między modelami językowymi
+        a komponentami wykonawczymi systemu.}
 
-    \item \textbf{C. Sun et al. (2025)} -- \textit{LLM-Based Multi-Agent Decision-Making: Challenges and Future Directions}. Praca o wykorzystaniu dużych modeli językowych w podejmowaniu decyzji przez grupy robotów. Pomaga w strukturyzacji podpowiedzi (promptów) i logiki decyzyjnej ukierunkowanej na bezpieczny dobór strategii nawigacyjnej.
+    \lit{C. Sun et al. (2025)}
+        {LLM-Based Multi-Agent Decision-Making:
+        Challenges and Future Directions}
+        {Praca o wykorzystaniu dużych modeli językowych
+        w podejmowaniu decyzji przez grupy robotów.
+        Pomaga w strukturyzacji podpowiedzi (promptów)
+        i logiki decyzyjnej ukierunkowanej na bezpieczny
+        dobór strategii nawigacyjnej.}
 
-    \item \textbf{M. Pomianek (2026)} -- \textit{Analiza literatury HRI}. Przegląd zaawansowanych interfejsów komunikacyjnych. Uzasadnia zastosowanie koncepcji Edge Computing (przetwarzania lokalnego) pod kątem minimalizacji opóźnień w przesyłaniu poleceń i ochrony prywatności danych biometrycznych.
+    \lit{M. Pomianek (2026)}
+        {Analiza literatury HRI}
+        {Przegląd zaawansowanych interfejsów
+        komunikacyjnych. Uzasadnia zastosowanie koncepcji
+        Edge Computing (przetwarzania lokalnego) pod
+        kątem minimalizacji opóźnień w przesyłaniu
+        poleceń i ochrony prywatności danych
+        biometrycznych.}
 \end{itemize}
 
 \section*{3. Inteligencja stadna i algorytmy nawigacyjne}
-\textit{Literatura opisująca mechanikę ruchu grupy dronów (część matematyczna Rozdziału 1 i implementacja w Rozdziale 3).}
+\textit{Literatura opisująca mechanikę ruchu grupy
+dronów (część matematyczna Rozdziału 1 i implementacja
+w Rozdziale 3).}
 
-\begin{itemize}[leftmargin=*]
-    \item \textbf{Zhao et al. (2018)} -- \textit{Autonomous Decision Making for UAV Cooperative Pursuit-Evasion Game with Reinforcement Learning}. Artykuł o sterowaniu rojem przy użyciu uczenia ze wzmocnieniem. Służy jako punkt odniesienia pokazujący zalety podejścia hybrydowego (połączenie warstwy LLM z deterministycznymi algorytmami) pod kątem przewidywalności systemu w sytuacjach krytycznych.
+\begin{itemize}[leftmargin=*, itemsep=1.1em]
+    \lit{Zhao et al. (2018)}
+        {Autonomous Decision Making for UAV Cooperative
+        Pursuit-Evasion Game with Reinforcement Learning}
+        {Artykuł o sterowaniu rojem przy użyciu uczenia
+        ze wzmocnieniem. Służy jako punkt odniesienia
+        pokazujący zalety podejścia hybrydowego
+        (połączenie warstwy LLM z deterministycznymi
+        algorytmami) pod kątem przewidywalności systemu
+        w sytuacjach krytycznych.}
 
-    \item \textbf{Ł. Strąk (2017)} -- \textit{Adaptacyjny algorytm optymalizacji stadnej cząsteczek dla dynamicznego problemu komiwojażera}. Rozprawa doktorska wprowadzająca pojęcie „pamięci feromonowej”. Publikacja ta stanowi cenną inspirację teoretyczną przy projektowaniu mechanizmów zapobiegania utykaniu roju w minimach lokalnych i ślepych zaułkach mapy.
+    \lit{Ł. Strąk (2017)}
+        {Adaptacyjny algorytm optymalizacji stadnej
+        cząsteczek dla dynamicznego problemu
+        komiwojażera}
+        {Rozprawa doktorska wprowadzająca pojęcie
+        „pamięci feromonowej”. Publikacja ta stanowi
+        cenną inspirację teoretyczną przy projektowaniu
+        mechanizmów zapobiegania utykaniu roju
+        w minimach lokalnych i ślepych zaułkach mapy.}
 
-    \item \textbf{E. Bonabeau (1999) / J. Kennedy (2001)} -- \textit{Swarm Intelligence}. Klasyczne pozycje opisujące rozproszoną samoorganizację w przyrodzie (stygmergię). Dostarczają podstaw teoretycznych do analizy zachowań kolektywnych i odporności rozproszonej struktury stada na utratę części jednostek.
+    \lit{E. Bonabeau (1999) / J. Kennedy (2001)}
+        {Swarm Intelligence}
+        {Klasyczne pozycje opisujące rozproszoną
+        samoorganizację w przyrodzie.
+        Dostarczają podstaw teoretycznych do analizy
+        zachowań kolektywnych i odporności rozproszonej
+        struktury stada na utratę części jednostek.}
 \end{itemize}
 
-\section*{4. Technologie i środowisko symulacyjne (ROS2 / Nav2)}
-\textit{Materiały inżynierskie, które posłużą jako wytyczne do konfiguracji środowiska badawczego w Rozdziałach 2. i 3.}
+\section*{4. Technologie i środowisko symulacyjne
+(ROS2 / Nav2)}
+\textit{Materiały inżynierskie, które posłużą jako
+wytyczne do konfiguracji środowiska badawczego
+w Rozdziałach 2. i 3.}
 
-\begin{itemize}[leftmargin=*]
-    \item \textbf{S. Macenski (2020) i A. Bonci (2023)} -- \textit{The Marathon 2: A Navigation System} oraz \textit{ROS2-Based Frameworks for Increasing Robot Autonomy}. Analizy stosu Navigation2 (Nav2) pod kątem podnoszenia autonomii robotów mobilnych. Publikacje te są przydatne przy analizie struktury Drzew Zachowań (Behavior Trees) i mechanizmów asynchronicznego omijania przeszkód.
+\begin{itemize}[leftmargin=*, itemsep=1.1em]
+    \lit{S. Macenski (2020) i A. Bonci (2023)}
+        {The Marathon 2: A Navigation System /
+        ROS2-Based Frameworks for Increasing Robot
+        Autonomy}
+        {Opisy stosu nawigacyjnego Navigation2 (Nav2)
+        dla autonomicznych robotów mobilnych.
+        Przydatne przy analizie Drzew Zachowań
+        (Behavior Trees) oraz mechanizmów
+        asynchronicznego omijania przeszkód.}
 
-    \item \textbf{Dokumentacja techniczna platformy} -- \textit{DynamicSwarms: ds-crazyflies Documentation}. Zbiór specyfikacji technicznych dla symulatora dronów Crazyflie. Pozwala na uwzględnienie realnych ograniczeń kinematycznych i parametrów fizycznych platform latających w środowisku testowym.
+    \lit{Dokumentacja techniczna platformy}
+        {DynamicSwarms: ds-crazyflies Documentation}
+        {Zbiór specyfikacji technicznych dla
+        symulatora dronów Crazyflie. Pozwala na
+        uwzględnienie realnych ograniczeń
+        kinematycznych i parametrów fizycznych
+        platform latających w środowisku testowym.}
 \end{itemize}
 
 \end{document}
